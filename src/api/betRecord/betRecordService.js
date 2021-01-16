@@ -49,4 +49,22 @@ getBets = async (req, res, next) => {
         res.status(500).json(error)
     }
 }
-module.exports = { addBet, getCurrentBet, getBets }
+
+/*
+ * getStatus
+ * 
+ * dummy endpoint
+ */
+getStatus = async (req, res, next) => {
+    try{
+        var result = "Toda forma de poder e uma forma de viver por nada."
+        res.status(200).send(result)
+        next()
+    } catch (error) {
+        console.log(error)
+        res.status(500).json(error)
+    }
+}
+
+
+module.exports = { addBet, getCurrentBet, getBets, getStatus }
