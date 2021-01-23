@@ -1,1 +1,1 @@
-mongod --dbpath=/Users/walter.cardoso/MongoData
+mongod --dbpath=/Users/waltersantosfilho/MongoData
