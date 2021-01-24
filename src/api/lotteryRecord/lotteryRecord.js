@@ -10,6 +10,12 @@ const betSchema = new Mongoose.Schema({
     finalRound: { type: Number, min: 0, required: true}
 })
 
-var bets = Mongoose.model('bets', betSchema)
+const drawSchema = new Mongoose.Schema({
+    drawDate: { type:Date, required: true },
+    drawRound: { type: Number, min: 0, required: true}
+})
 
-module.exports = { bets }
+var bets = Mongoose.model('bets', betSchema)
+var draws = Mongoose.model('draws', drawSchema)
+
+module.exports = { bets, draws }

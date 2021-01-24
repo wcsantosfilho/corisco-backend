@@ -16,5 +16,5 @@ module.exports = function(server) {
     router.use('/getCurrentBet', lotteryRecord.getCurrentBet)
     router.use('/getBets', lotteryRecord.getBets)
     router.use('/getStatus', lotteryRecord.getStatus)
-    //router.use('/addDraw', lotteryRecord.addDraw)
+    router.use('/addDraw', lotteryRecord.addDraw)
 }

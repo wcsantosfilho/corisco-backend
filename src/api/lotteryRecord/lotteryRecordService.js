@@ -1,4 +1,4 @@
-const betRecord = require('./lotteryRecord')
+const myRecords = require('./lotteryRecord')
 
 // Endpoints da API
 /*
@@ -8,7 +8,7 @@ const betRecord = require('./lotteryRecord')
  */
 addBet = async (req, res, next) => {
     try {
-        const bet = await new betRecord.bets( {...req.body} ).save()
+        const bet = await new myRecords.bets( {...req.body} ).save()
         res.send(bet)
     } catch (error) {
         console.log('Erro encontrado: ' + error)
@@ -23,7 +23,7 @@ addBet = async (req, res, next) => {
  */
 getCurrentBet = async (req, res, next) => {
     try{
-        var bet = betRecord.bets
+        var bet = myRecords.bets
         var result = await bet.find().limit(1).sort( { finalRound: -1 })
         res.status(200).send(result[0])
         next()
@@ -40,7 +40,7 @@ getCurrentBet = async (req, res, next) => {
  */
 getBets = async (req, res, next) => {
     try{
-        var bet = betRecord.bets
+        var bet = myRecords.bets
         var result = await bet.find().sort( { finalRound: -1 })
         res.status(200).send(result)
         next()
@@ -66,5 +66,19 @@ getStatus = async (req, res, next) => {
     }
 }
 
+/*
+ * addDraw
+ * 
+ * add a Draw to the database
+ */
+addDraw = async (req, res, next) => {
+    try {
+        const draw = await new myRecords.draws( {...req.body} ).save()
+        res.send(draw)
+    } catch (error) {
+        console.log('Erro encontrado: ' + error)
+        res.status(422).json(error)
+    }
+}
 
-module.exports = { addBet, getCurrentBet, getBets, getStatus }
+module.exports = { addBet, getCurrentBet, getBets, getStatus, addDraw }
