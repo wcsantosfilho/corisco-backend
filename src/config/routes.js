@@ -1,5 +1,5 @@
 const express = require('express')
-const betRecords = require('../api/betRecord/betRecordService')
+const lotteryRecord = require('../api/lotteryRecord/lotteryRecordService')
 
 module.exports = function(server) {
     /*
@@ -10,11 +10,11 @@ module.exports = function(server) {
     server.use('/api', router)
 
     /*
-     * The endpoints below stay under /api/ and are defined in betRecordService.js
+     * The endpoints below stay under /api/ and are defined in lotteryRecordService.js
      */
-    router.use('/addBet', betRecords.addBet)
-    router.use('/getCurrentBet', betRecords.getCurrentBet)
-    router.use('/getBets', betRecords.getBets)
-    router.use('/getStatus', betRecords.getStatus)
-
+    router.use('/addBet', lotteryRecord.addBet)
+    router.use('/getCurrentBet', lotteryRecord.getCurrentBet)
+    router.use('/getBets', lotteryRecord.getBets)
+    router.use('/getStatus', lotteryRecord.getStatus)
+    //router.use('/addDraw', lotteryRecord.addDraw)
 }

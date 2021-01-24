@@ -1,4 +1,4 @@
-const betRecord = require('./betRecord')
+const betRecord = require('./lotteryRecord')
 
 // Endpoints da API
 /*

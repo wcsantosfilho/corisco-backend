@@ -1,0 +1,5 @@
+{
+	"betDate": "2021-01-03T20:18:00.000Z", 
+	"initialRound": 2040, 
+	"finalRound": 2049
+}

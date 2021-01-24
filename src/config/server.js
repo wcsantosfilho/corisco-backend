@@ -14,7 +14,7 @@ server.use(queryParser())
 server.listen(port, () => {
     console.log(`Backend is running on port ${port} at ${server.get('env')}.`)
     console.log('vv server start vv')
-    console.log('Server is listening on port ' + process.env.PORT);
+    console.log('Server is listening on port ' + process.env.PORT + '|' + port);
     console.log(server.get('env'))
     console.log('^^ server start ^^')
 })
