@@ -6,9 +6,10 @@ Aplicação Node.js + React para controlar a validade dos meus jogos da mega-sen
 - [x] correção leitura backend
 - [x] formatação dashboard
 - [x] deploy backend heroku
+- [x] adicionar concurso realizado
+- [x] verificação jogo expirado
+- [ ] testes automáticos concurso realizado
 - [ ] deploy frontend heroku
-- [ ] adicionar concurso realizado
-- [ ] verificação jogo expirado
 - [ ] leitura concurso realizado
 - [ ] formulário para inclusão dos jogos
 - [ ] resolver issues de segurança
@@ -17,4 +18,5 @@ Aplicação Node.js + React para controlar a validade dos meus jogos da mega-sen
 
 # To learn
 - [ ] decorator = (o que é, como funciona?)
-- [ ] const { xalala } = this.props // O que é destruct de xalala
+- [X] const { xalala } = this.props // O que é destruct de xalala
+- [ ] COMMON JS vs ES6

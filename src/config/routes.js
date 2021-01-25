@@ -17,4 +17,5 @@ module.exports = function(server) {
     router.use('/getBets', lotteryRecord.getBets)
     router.use('/getStatus', lotteryRecord.getStatus)
     router.use('/addDraw', lotteryRecord.addDraw)
+    router.use('/checkIfLastBetIsEqualDraw', lotteryRecord.checkIfLastBetIsEqualDraw)
 }

@@ -81,4 +81,32 @@ addDraw = async (req, res, next) => {
     }
 }
 
-module.exports = { addBet, getCurrentBet, getBets, getStatus, addDraw }
+/*
+ * checkIfLastBetIsEqualDraw
+ * 
+ * check if a last Draw is equal than last Bet, i.e., there is no valid Bet to a run in a Draw
+ */
+checkIfLastBetIsEqualDraw = async (req, res, next) => {
+    try {
+        var bet = myRecords.bets
+        var lastBet = await bet.find().limit(1).sort( { finalRound: -1 })
+        var lastBetRound = lastBet[0].finalRound
+
+        var draw = myRecords.draws
+        var lastDraw = await draw.find().limit(1).sort( { drawRound: -1 })
+        var lastDrawRound = lastDraw[0].drawRound
+
+        if (lastBetRound == lastDrawRound) {
+            var result = `Oh,oh... last Bet ${lastBetRound} = last Draw ${lastDrawRound}.`
+        } else {
+            var result = `Don't worry. Last Bet ${lastBetRound} <> last Draw ${lastDrawRound}.`
+        }
+        res.status(200).send(result)
+    } catch (error) {
+        console.log('Erro encontrado: ' + error)
+        res.status(500).json(error)
+    }
+}
+
+
+module.exports = { addBet, getCurrentBet, getBets, getStatus, addDraw, checkIfLastBetIsEqualDraw }
