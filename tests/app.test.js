@@ -21,10 +21,6 @@ const bet2 = {
 
 
 /**
-  * @desc Testes da API
-  * @param  string testDescription - the message to be displayed
-            callback - tests to be done
-  * @return ???
 */
 test('#A1 - POST de: /api/addBet/', function (t) {
     supertest(app.server)
@@ -40,10 +36,6 @@ test('#A1 - POST de: /api/addBet/', function (t) {
 })
 
 /**
-  * @desc Testes da API
-  * @param  string testDescription - the message to be displayed
-            callback - tests to be done
-  * @return ???
 */
 test('#A2 - POST de: /api/addBet/', function (t) {
   supertest(app.server)
@@ -58,12 +50,7 @@ test('#A2 - POST de: /api/addBet/', function (t) {
   })
 })
 
-
 /**
-  * @desc Teste de leitura da API
-  * @param  string testDescription - the message to be displayed
-            callback - tests to be done
-  * @return ???
 */
 test('#B - GET de: api/getBets', function (t) {
   // Chama app.server porque foram exportados "server" e "db"
@@ -99,7 +86,7 @@ test('#B - GET de: api/getBets', function (t) {
   )
 
   .end((err, res) => {
-      console.log(res.body);
+      // console.log(res.body);
       // TESTE B
       t.error(err, '#B - Execução do GET /api/getBets')
       t.end()
@@ -108,10 +95,6 @@ test('#B - GET de: api/getBets', function (t) {
 
 
 /**
-  * @desc Teste de leitura da API
-  * @param  string testDescription - the message to be displayed
-            callback - tests to be done
-  * @return ???
 */
 test('#Z - GET de: api/getCurrentBet', function (t) {
     // Chama app.server porque foram exportados "server" e "db"
@@ -133,7 +116,7 @@ test('#Z - GET de: api/getCurrentBet', function (t) {
         __v: 0
     })
     .end((err, res) => {
-        console.log(res.body);
+        // console.log(res.body);
         // TESTE Z
         t.error(err, '#Z - Execução do GET /api/getCurrentBet')
         

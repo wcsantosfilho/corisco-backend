@@ -18,5 +18,6 @@ server.listen(port, () => {
     console.log(server.get('env'))
     console.log('^^ server start ^^')
 })
+server.on( 'close', () => console.log('Closing') )
 
 module.exports = server

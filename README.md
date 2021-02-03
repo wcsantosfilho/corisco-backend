@@ -8,6 +8,7 @@ Aplicação Node.js + React para controlar a validade dos meus jogos da mega-sen
 - [x] deploy backend heroku
 - [x] adicionar concurso realizado
 - [x] verificação jogo expirado
+- [ ] corrigir "hanged" testes
 - [ ] testes automáticos concurso realizado
 - [ ] deploy frontend heroku
 - [ ] leitura concurso realizado
