@@ -96,8 +96,8 @@ checkIfLastBetIsEqualDraw = async (req, res, next) => {
         var lastDraw = await draw.find().limit(1).sort( { drawRound: -1 })
         var lastDrawRound = lastDraw[0].drawRound
 
-        if (lastBetRound == lastDrawRound) {
-            var result = `Oh,oh... last Bet ${lastBetRound} = last Draw ${lastDrawRound}.`
+        if (lastBetRound == lastDrawRound || lastBetRound <= lastDrawRound) {
+            var result = `Oh,oh... Last Bet ${lastBetRound} = last Draw ${lastDrawRound}.`
         } else {
             var result = `Don't worry. Last Bet ${lastBetRound} <> last Draw ${lastDrawRound}.`
         }

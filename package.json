@@ -5,7 +5,7 @@
   "main": "src/loader.js",
   "scripts": {
     "dropTestDB": "mongo BDscripts/dropBDTeste.js",
-    "test": "export NODE_ENV=test && tape ./tests/**/*.js | tap-spec && npm run dropTestDB",
+    "test": "export NODE_ENV=test && mocha ./tests/**/*.js && mongo BDscripts/dropBDTeste.js",
     "dev": "export NODE_ENV=development && nodemon --watch src/loader.js",
     "debug": "export NODE_ENV=development && nodemon --watch --inspect src/loader.js",
     "production": "export NODE_ENV=production && export MONGODB_URI=mongodb://localhost/corisco && pm2 start src/loader.js --name corisco-backend",
@@ -23,6 +23,7 @@
     "express-query-int": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.19",
+    "mocha": "^8.2.1",
     "mongoose": "^5.10.13",
     "mongoose-paginate": "^5.0.3",
     "pm2": "^4.5.1",
