@@ -25,7 +25,16 @@ getCurrentBet = async (req, res, next) => {
     try{
         var bet = myRecords.bets
         var result = await bet.find().limit(1).sort( { finalRound: -1 })
-        res.status(200).send(result[0])
+        var statusCode = 0
+        var responseJson
+        if (result.length == 0) {
+            statusCode = 404
+            responseJson = { responsecode: statusCode, erro: 'Nenhuma aposta encontrada'}
+        } else if (result.length > 0) {
+            statusCode = 200
+            responseJson = result[0]
+        }
+        res.status(statusCode).send(responseJson)
         next()
     } catch (error) {
         console.log(error)
@@ -42,7 +51,16 @@ getBets = async (req, res, next) => {
     try{
         var bet = myRecords.bets
         var result = await bet.find().sort( { finalRound: -1 })
-        res.status(200).send(result)
+        var statusCode = 0
+        var responseJson
+        if (result.length == 0) {
+            statusCode = 404
+            responseJson = { responsecode: statusCode, erro: 'Nenhuma aposta encontrada'}
+        } else if (result.length > 0) {
+            statusCode = 200
+            responseJson = result
+        }
+        res.status(statusCode).send(responseJson)
         next()
     } catch (error) {
         console.log(error)
@@ -90,18 +108,33 @@ checkIfLastBetIsEqualDraw = async (req, res, next) => {
     try {
         var bet = myRecords.bets
         var lastBet = await bet.find().limit(1).sort( { finalRound: -1 })
-        var lastBetRound = lastBet[0].finalRound
-
         var draw = myRecords.draws
         var lastDraw = await draw.find().limit(1).sort( { drawRound: -1 })
-        var lastDrawRound = lastDraw[0].drawRound
 
-        if (lastBetRound == lastDrawRound || lastBetRound <= lastDrawRound) {
-            var result = `Oh,oh... Last Bet ${lastBetRound} = last Draw ${lastDrawRound}.`
+        var statusCode = 0
+        var responseObject
+        if (lastDraw.length == 0 || lastBet.length == 0) {
+            statusCode = 404
+            responseObject = { responseCode: statusCode, 
+                mensagem: 'Aposta e/ou Concurso não encontrados.' 
+            }
         } else {
-            var result = `Don't worry. Last Bet ${lastBetRound} <> last Draw ${lastDrawRound}.`
+            var lastBetRound = lastBet[0].finalRound
+            var lastDrawRound = lastDraw[0].drawRound
+            if (lastBetRound == lastDrawRound || lastBetRound <= lastDrawRound) {
+                statusCode = 200
+                responseObject = { responseCode: statusCode, 
+                    mensagem: `Você não tem aposta para o próximo concurso: Última aposta: ${lastBetRound}, último concurso: ${lastDrawRound}.` 
+                }
+            } else {
+                statusCode = 200
+                responseObject = { responseCode: statusCode, 
+                    mensagem: `Tudo certo. Sua última aposta: ${lastBetRound}, último concurso: ${lastDrawRound}.` 
+                }
+            }
         }
-        res.status(200).send(result)
+        res.status(statusCode).send(responseObject)
+        next()
     } catch (error) {
         console.log('Erro encontrado: ' + error)
         res.status(500).json(error)
