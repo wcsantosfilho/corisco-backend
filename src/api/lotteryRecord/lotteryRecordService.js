@@ -1,72 +1,11 @@
-const myRecords = require('./lotteryRecord')
+const myRecords = require('../../models/lotteryModel')
+
+/*
+ * ESTE ARQUIVO SERÁ ALTERADO PARA ARQUIVOS SEPARADOS NA PASTA ROUTES
+ */
 
 // Endpoints da API
-/*
- * addBet
- * 
- * add a Bet to the database
- */
-addBet = async (req, res, next) => {
-    try {
-        const bet = await new myRecords.bets( {...req.body} ).save()
-        res.send(bet)
-    } catch (error) {
-        console.log('Erro encontrado: ' + error)
-        res.status(422).json(error)
-    }
-}
 
-/*
- * getCurrentBet
- * 
- * get the most recent Bet
- */
-getCurrentBet = async (req, res, next) => {
-    try{
-        var bet = myRecords.bets
-        var result = await bet.find().limit(1).sort( { finalRound: -1 })
-        var statusCode = 0
-        var responseJson
-        if (result.length == 0) {
-            statusCode = 404
-            responseJson = { responsecode: statusCode, erro: 'Nenhuma aposta encontrada'}
-        } else if (result.length > 0) {
-            statusCode = 200
-            responseJson = result[0]
-        }
-        res.status(statusCode).send(responseJson)
-        next()
-    } catch (error) {
-        console.log(error)
-        res.status(500).json(error)
-    }
-}
-
-/*
- * getBets
- * 
- * List all bets
- */
-getBets = async (req, res, next) => {
-    try{
-        var bet = myRecords.bets
-        var result = await bet.find().sort( { finalRound: -1 })
-        var statusCode = 0
-        var responseJson
-        if (result.length == 0) {
-            statusCode = 404
-            responseJson = { responsecode: statusCode, erro: 'Nenhuma aposta encontrada'}
-        } else if (result.length > 0) {
-            statusCode = 200
-            responseJson = result
-        }
-        res.status(statusCode).send(responseJson)
-        next()
-    } catch (error) {
-        console.log(error)
-        res.status(500).json(error)
-    }
-}
 
 /*
  * getStatus
@@ -142,4 +81,4 @@ checkIfLastBetIsEqualDraw = async (req, res, next) => {
 }
 
 
-module.exports = { addBet, getCurrentBet, getBets, getStatus, addDraw, checkIfLastBetIsEqualDraw }
+module.exports = { getStatus, addDraw, checkIfLastBetIsEqualDraw }
