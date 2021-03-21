@@ -1,11 +1,16 @@
 const express = require('express')
 const BetService = require('../../services/betService')
 
-// Endpoints da API
+/* 
+ * Endpoints da API
+ * Estes endpoints recebem o request, instanciam o serviço, chamam um método do serviço
+ * e enviam o response
+ */
+
 /*
  * addBet
  * 
- * add a Bet to the database
+ * add a new bet
  */
 addBet = async (req, res, next) => {
     try {
@@ -25,7 +30,7 @@ addBet = async (req, res, next) => {
 /*
  * getCurrentBet
  * 
- * get the most recent Bet
+ * get the most recent bet
  */
 getCurrentBet = async (req, res, next) => {
     try{
@@ -45,7 +50,7 @@ getCurrentBet = async (req, res, next) => {
 /*
  * getBets
  * 
- * List all bets
+ * list all bets
  */
 getBets = async (req, res, next) => {
     try{

@@ -1,8 +1,8 @@
 const express = require('express')
-const lotteryRecord = require('../api/lotteryRecord/lotteryRecordService')
-const betRoute = require('../api/routes/betRoutes')
-const drawRoute = require('../api/routes/drawRoutes')
-const genericRoute = require('../api/routes/genericRoutes')
+const betRoutes = require('../api/routes/betRoutes')
+const drawRoutes = require('../api/routes/drawRoutes')
+const genericRoutes = require('../api/routes/genericRoutes')
+const expirationRoutes = require('../api/routes/expirationRoutes')
 
 module.exports = function(server) {
     /*
@@ -13,12 +13,12 @@ module.exports = function(server) {
     server.use('/api', router)
 
     /*
-     * The endpoints below stay under /api/ and are defined in lotteryRecordService.js
+     * The endpoints below stay under /api/ and are defined in route files
      */
-    router.use('/addBet', betRoute.addBet)
-    router.use('/getCurrentBet', betRoute.getCurrentBet)
-    router.use('/getBets', betRoute.getBets)
-    router.use('/getStatus', genericRoute.getStatus)
-    router.use('/addDraw', drawRoute.addDraw)
-    router.use('/checkIfLastBetIsEqualDraw', lotteryRecord.checkIfLastBetIsEqualDraw)
+    router.use('/addBet', betRoutes.addBet)
+    router.use('/getCurrentBet', betRoutes.getCurrentBet)
+    router.use('/getBets', betRoutes.getBets)
+    router.use('/getStatus', genericRoutes.getStatus)
+    router.use('/addDraw', drawRoutes.addDraw)
+    router.use('/checkIfLastBetIsEqualDraw', expirationRoutes.checkIfLastBetIsEqualDraw)
 }

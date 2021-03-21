@@ -1,11 +1,17 @@
 const express = require('express')
 const DrawService = require('../../services/drawService')
 
-// Endpoints da API
+
+/* 
+ * Endpoints da API
+ * Estes endpoints recebem o request, instanciam o serviço, chamam um método do serviço
+ * e enviam o response
+ */
+
 /*
  * addDraw
  * 
- * add a Draw to the database
+ * add a new draw
  */
 addDraw = async (req, res, next) => {
     try {
