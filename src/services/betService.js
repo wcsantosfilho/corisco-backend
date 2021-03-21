@@ -1,6 +1,6 @@
 const LotteryModel = require('../models/lotteryModel')
 
-module.exports = class LotteryService {
+module.exports = class BetService {
     constructor (betDate, initialRound, finalRound) {
         this.betDate = betDate
         this.initialRound = initialRound
