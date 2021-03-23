@@ -121,16 +121,16 @@ describe('Module', () => {
       .expect('Content-Type', 'application/json; charset=utf-8')
       .expect(200)
       .expect(function(res) {
-        res.body._id = 'some fixed id'
-        res.body.__v = 0
+        res.body[0]._id = 'some fixed id'
+        res.body[0].__v = 0
       })    
-      .expect(200, {
+      .expect(200, [{
           _id: 'some fixed id',
           betDate: "2020-01-05T22:00:00.000Z",
           initialRound: 1020,
           finalRound: 1028,
           __v: 0
-      })
+      }])
       .end((err, res) => {
           if (err) throw done(err)
           done()
@@ -142,9 +142,10 @@ describe('Module', () => {
       .get('/api//checkIfLastBetIsEqualDraw/')
       .expect('Content-Type', /json/)
       .expect(404, { 
-          responseCode: 404, 
-          mensagem: 'Aposta e/ou Concurso não encontrados.'
-      })
+          status: 404,
+          message: "Não encontrou concurso ou aposta para comparar" 
+        }
+      )
       .end((err, res) => {
           if (err) throw done(err)
           done()
@@ -168,8 +169,8 @@ describe('Module', () => {
       .get('/api//checkIfLastBetIsEqualDraw/')
       .expect('Content-Type', /json/)
       .expect(200, { 
-          responseCode: 200, 
-          mensagem: `Você não tem aposta para o próximo concurso: Última aposta: 1028, último concurso: 1030.`
+          status: 200, 
+          message: `Sua última aposta 1028 é menor que o concurso atual(1030).`
       })
       .end((err, res) => {
           if (err) throw done(err)
@@ -194,8 +195,8 @@ describe('Module', () => {
       .get('/api//checkIfLastBetIsEqualDraw/')
       .expect('Content-Type', /json/)
       .expect(200, { 
-          responseCode: 200, 
-          mensagem: `Tudo certo. Sua última aposta: 1039, último concurso: 1030.`
+          status: 200, 
+          message: `Sua última aposta 1039 é maior que o concurso atual(1030).`
       })
       .end((err, res) => {
           if (err) throw done(err)

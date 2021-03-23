@@ -33,16 +33,32 @@ module.exports = class ExpirationService {
                 var lastBet = resultLastBet.payload[0].finalRound
                 var lastDraw = resultLastDraw.payload[0].drawRound
                 if ( lastBet == lastDraw ) {
-                    return { status:200,
+                    return { status: 200,
                         payload: { status: 200,
                             message: `Sua última aposta ${lastBet} já foi sorteada no concurso ${lastDraw}.`
                         }
                     }
-                } else {
-                    return { status: 404,
-                        payload: { status: 404,
-                            message: "Não encontrou concurso ou aposta para comparar" }
+                } 
+                if ( lastBet > lastDraw) {
+                    return { status: 200,
+                        payload: { status: 200,
+                            message: `Sua última aposta ${lastBet} é maior que o concurso atual(${lastDraw}).`
                         }
+                    }
+                }
+                if ( lastBet < lastDraw) {
+                    return { status: 200,
+                        payload: { status: 200,
+                            message: `Sua última aposta ${lastBet} é menor que o concurso atual(${lastDraw}).`
+                        }
+                    }
+                }
+            }
+            if ( resultLastBet.status != 200 || resultLastDraw.status != 200) {
+                return { status: 404,
+                    payload: { status: 404,
+                        message: "Não encontrou concurso ou aposta para comparar" 
+                    }
                 }
             }
         } catch (e) {
