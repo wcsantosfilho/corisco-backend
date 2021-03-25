@@ -30,7 +30,7 @@ const draw1 = {
   drawRound: 1030
 }
 
-describe('Module', () => {
+describe('Teste da API', () => {
   // after(function (done) {
   //   app.close(done)
   // })
