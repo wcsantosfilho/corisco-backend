@@ -31,9 +31,14 @@ const draw1 = {
 }
 
 describe('Teste da API', () => {
-  // after(function (done) {
-  //   app.close(done)
-  // })
+  before(function(done) {
+    //Another possibility is to check if mongoose.connection.readyState equals 1
+    if (app.db.connection.readyState == 1) {
+        return done()
+    }
+    app.db.connect(MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true})
+  })
+
 
   it('#A0 - GET /getStatus - Server está no ar?', (done) => {
     supertest(app.server)

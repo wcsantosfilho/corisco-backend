@@ -20,9 +20,27 @@ if (process.env.NODE_ENV == "development") {
     MONGO_URI = config.development.mongodbURI
 }
 
-mongoose.Promise = global.Promise
 
-module.exports = mongoose.connect(MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true, })
+mongoose.connection.on('connected', function(){
+    console.log("Mongoose default connection is open to ", MONGO_URI);
+})
+mongoose.connection.on('error', function(err){
+    console.log("Mongoose default connection has occured "+err+" error");
+})
+mongoose.connection.on('disconnected', function(){
+    console.log("Mongoose default connection is disconnected");
+})
+mongoose.connection.on('reconnected', function() {
+    console.log('Reconnected to MongoDB');
+})
+process.on('SIGINT', function(){
+    mongoose.connection.close(function(){
+        console.log("Mongoose default connection is disconnected due to application termination");
+        process.exit(0)
+    })
+})
+
 mongoose.Error.messages.general.required = "O atributo '{PATH}' é obrigatório."
 mongoose.Error.messages.Number.min = 
     "O '{VALUE}' informado é menor que o limite mínimo de '{MIN}'."
