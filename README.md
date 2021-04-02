@@ -10,9 +10,12 @@ Aplicação Node.js + React para controlar a validade dos meus jogos da mega-sen
 - [x] verificação jogo expirado
 - [x] rever todos os testes - nova estrutura de payload
 - [ ] esquema MVC
-- [ ] testes dos 'services'
-- [ ] corrigir "hanged" testes
+- [x] testes de 'betService'
+- [ ] testes de 'drawService'
+- [ ] testes de 'expirationService'
+- [x] corrigir "hanged" testes
 - [ ] esquema de variáveis de ambgiente: (dotenv?)
+- [ ] logger ou coisa parecida
 - [x] testes automáticos concurso realizado
 - [ ] envio de e-mail concurso expirado
 - [ ] deploy frontend heroku

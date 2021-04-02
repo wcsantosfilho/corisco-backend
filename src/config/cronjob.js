@@ -27,37 +27,37 @@ const job = schedule.scheduleJob('* * * 1 * *', function(){
 //   })
 
 
-  var http = require("https");
+  // var http = require("https");
 
-  var options = {
-    "method": "POST",
-    "hostname": "api.sendgrid.com",
-    "port": null,
-    "path": "/v3/mail/send",
-    "headers": {
-      "authorization": `Bearer ${process.env.SENDGRID_API_KEY}`,
-      "content-type": "application/json"
-    }
-  };
+  // var options = {
+  //   "method": "POST",
+  //   "hostname": "api.sendgrid.com",
+  //   "port": null,
+  //   "path": "/v3/mail/send",
+  //   "headers": {
+  //     "authorization": `Bearer ${process.env.SENDGRID_API_KEY}`,
+  //     "content-type": "application/json"
+  //   }
+  // };
   
-  var req = http.request(options, function (res) {
-    var chunks = [];
+  // var req = http.request(options, function (res) {
+  //   var chunks = [];
   
-    res.on("data", function (chunk) {
-      chunks.push(chunk);
-    });
+  //   res.on("data", function (chunk) {
+  //     chunks.push(chunk);
+  //   });
   
-    res.on("end", function () {
-      var body = Buffer.concat(chunks);
-      console.log(body.toString());
-    });
-  });
+  //   res.on("end", function () {
+  //     var body = Buffer.concat(chunks);
+  //     console.log(body.toString());
+  //   });
+  // });
   
-  req.write(JSON.stringify({ personalizations: 
-     [ { to: [ { email: 'walter.filho@bcredi.com.br', name: 'Walter Santos Filho' } ],
-         dynamic_template_data: { first_name: 'Xico', adjective: '', noun: '', currentDayofWeek: '' },
-         subject: 'Hello, World!' } ],
-    from: { email: 'wcsantosfilho@gmail.com', name: 'Walter Santos Filho' },
-    reply_to: { email: 'wcsantosfilho@gmail.com', name: 'Walter Santos Filho' },
-    template_id: 'd-8e3c4b535350446b92481a8a5f2fc976' }));
-  req.end();
+  // req.write(JSON.stringify({ personalizations: 
+  //    [ { to: [ { email: 'wcsantosfilho@gmail.com', name: 'Walter Santos Filho' } ],
+  //        dynamic_template_data: { first_name: 'Xico', adjective: '', noun: '', currentDayofWeek: '' },
+  //        subject: 'Hello, World!' } ],
+  //   from: { email: 'wcsantosfilho@gmail.com', name: 'Walter Santos Filho' },
+  //   reply_to: { email: 'wcsantosfilho@gmail.com', name: 'Walter Santos Filho' },
+  //   template_id: 'd-8e3c4b535350446b92481a8a5f2fc976' }));
+  // req.end();

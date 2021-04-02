@@ -215,12 +215,18 @@ describe('Teste da API', () => {
       .expect(200)
       .end((err, res) => {
         if (err) throw done(err)
-
-        // Fecha a conexão com o banco para encerrar o teste, 
-        // caso contrário ficava suspenso
-        app.db.connection.close()
         done()
       })
+  })
+
+  // You can put one ‘after()’ statement above all else that will run when all tests are finished
+  after(function(done){
+    app.db.connection.db.dropDatabase(function(){
+      console.log('drop database')
+      app.db.connection.close(function(){
+        done();
+      })
+    })
   })
 
 })
