@@ -55,7 +55,7 @@ setTimeout( function() {
         })
 
         after( function() {
-            console.log('Draw: after')
+            console.log('Draw: after v')
             app.db.connection.db.dropDatabase()
             console.log(`readyState: ${app.db.connection.readyState}`)
             console.log('Draw: after ^')
