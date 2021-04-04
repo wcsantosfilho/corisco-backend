@@ -21,18 +21,19 @@ if (process.env.NODE_ENV == "development") {
 }
 
 
-mongoose.connect(MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true, })
+mongoose.connect(MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true })
+
 mongoose.connection.on('connected', function(){
-    console.log("Mongoose default connection is open to ", MONGO_URI);
+    console.log("Conn: Mongoose default connection is open to ", MONGO_URI);
 })
 mongoose.connection.on('error', function(err){
-    console.log("Mongoose default connection has occured "+err+" error");
+    console.log("Err: Mongoose default connection has occured "+err+" error");
 })
 mongoose.connection.on('disconnected', function(){
-    console.log("Mongoose default connection is disconnected");
+    console.log("Disconn: Mongoose default connection is disconnected");
 })
 mongoose.connection.on('reconnected', function() {
-    console.log('Reconnected to MongoDB');
+    console.log('Reconn: Reconnected to MongoDB');
 })
 process.on('SIGINT', function(){
     mongoose.connection.close(function(){

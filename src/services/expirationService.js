@@ -13,8 +13,8 @@ const BetService = require('./betService')
   */
 
 module.exports = class ExpirationService {
-    constructor (expirationDummy) {
-        this.expirationDummy = expirationDummy
+    constructor (expirationStatus = null) {
+        this.expirationStatus = expirationStatus
     }
 
     // last bet is equal last draw?
@@ -33,6 +33,7 @@ module.exports = class ExpirationService {
                 var lastBet = resultLastBet.payload[0].finalRound
                 var lastDraw = resultLastDraw.payload[0].drawRound
                 if ( lastBet == lastDraw ) {
+                    this.expirationStatus = 1
                     return { status: 200,
                         payload: { status: 200,
                             message: `Sua última aposta ${lastBet} já foi sorteada no concurso ${lastDraw}.`
@@ -40,6 +41,7 @@ module.exports = class ExpirationService {
                     }
                 } 
                 if ( lastBet > lastDraw) {
+                    this.expirationStatus = 2
                     return { status: 200,
                         payload: { status: 200,
                             message: `Sua última aposta ${lastBet} é maior que o concurso atual(${lastDraw}).`
@@ -47,6 +49,7 @@ module.exports = class ExpirationService {
                     }
                 }
                 if ( lastBet < lastDraw) {
+                    this.expirationStatus = 3
                     return { status: 200,
                         payload: { status: 200,
                             message: `Sua última aposta ${lastBet} é menor que o concurso atual(${lastDraw}).`
@@ -55,6 +58,7 @@ module.exports = class ExpirationService {
                 }
             }
             if ( resultLastBet.status != 200 || resultLastDraw.status != 200) {
+                this.expirationStatus = 999
                 return { status: 404,
                     payload: { status: 404,
                         message: "Não encontrou concurso ou aposta para comparar" 
