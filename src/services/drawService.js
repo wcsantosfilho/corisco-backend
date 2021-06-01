@@ -36,7 +36,7 @@ module.exports = class DrawService {
             return { status: 500, 
                 payload: { status: 500,
                     messagem: "Erro inesperado",
-                    stack: JSON(e)
+                    stack: JSON.stringify(e)
                 }
             }
         }
@@ -62,7 +62,7 @@ module.exports = class DrawService {
             return { status: 500, 
                 payload: { status: 500,
                     messagem: "Erro inesperado",
-                    stack: JSON(e)
+                    stack: JSON.stringify(e)
                 }
             }
         }        

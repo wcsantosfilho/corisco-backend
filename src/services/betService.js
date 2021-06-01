@@ -37,7 +37,7 @@ module.exports = class BetService {
             return { status: 500, 
                 payload: { status: 500,
                     messagem: "Erro inesperado",
-                    stack: JSON(e)
+                    stack: JSON.stringify(e)
                 }
             }
         }
@@ -63,7 +63,7 @@ module.exports = class BetService {
             return { status: 500, 
                 payload: { status: 500,
                     messagem: "Erro inesperado",
-                    stack: JSON(e)
+                    stack: JSON.stringify(e)
                 }
             }
         }        
@@ -89,7 +89,7 @@ module.exports = class BetService {
             return { status: 500, 
                 payload: { status: 500,
                     messagem: "Erro inesperado",
-                    stack: JSON(e)
+                    stack: JSON.stringify(e)
                 }
             }
         }

@@ -30,27 +30,29 @@ const url = 'http://www.loterias.caixa.gov.br/wps/portal/loterias/landing/megase
                 let results = []
                 let items = document.querySelectorAll('h2')
                 items.forEach((item) => {
-                    console.log('@')
                     results.push({
-                        url: item.innerHTML,
                         text: item.innerText
                     })
                 })
                 return results
             })
             await browser.close()
-            console.log('Cabeca: ', agaDois)
+            var drawText = agaDois.filter( (item) => {
+                // Look for "Resultado Concurso"
+                let pattern = /Resultado Concurso/g;
+                return pattern.test(item.text);
+            })
+            console.log('XPTO: ', drawText)
 
             return { status: 200,
-                payload: { status: 200,
-                    message: "Em cima dos telhados as antenas de TV tocam música urbana" }
-                }
+                payload: drawText 
+            }
         } catch (e) {
-            console.log(e)
+            console.log('Erro no catch: ' + e)
             return { status: 500, 
                 payload: { status: 500,
                     messagem: "Erro inesperado",
-                    stack: JSON(e)
+                    stack: JSON.stringify(e.message)
                 }
             }
         }
