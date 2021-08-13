@@ -8,15 +8,13 @@ const puppeteer = require('puppeteer');
  */
 
 const url = 'http://www.loterias.caixa.gov.br/wps/portal/loterias/landing/megasena';
-//const url = 'http://books.toscrape.com/'
-
 
  module.exports = class ScrapService {
     constructor (scrapStatus = null) {
         this.scrapStatus = scrapStatus
     }
 
-    // last bet is equal last draw?
+    // busca dados do ultimo concurso na página web da Caixa Economica Federal
     async scrapLastDraw() {
         try {
             const browser = await puppeteer.launch()
