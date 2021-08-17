@@ -1,5 +1,5 @@
 const { modelNames } = require('mongoose')
-const DrawResultService = require('../../services/drawResultService')
+const ScrapAndInsertDraw = require('../../services/scrapAndInsertDrawService')
 
 /* 
  * Endpoints da API
@@ -11,17 +11,20 @@ const DrawResultService = require('../../services/drawResultService')
  * 
  * 
  */
-scrap = async (req, res, next) => {
+combined = async (req, res, next) => {
     try {
         // instancia a classe ScrapService
-        const scrap = new ScrapService()
+        const combined = new ScrapAndInsertDraw()
+        console.log('[scrapAndInsertDrawRoute] depois de instanciar ScrapAndInsertDraw ', combined, '\n')
         // chama o serviço para buscar o último concurso
-        const lastDraw = await scrap.scrapLastDraw()
+        const combination = await combined.readCaixaPageAndInsertDraw()
+        console.log('[scrapAndInsertDrawRoute] depois de chamar readCaixa... ', combination, '\n')
         // envia como retorno o payload recebido do Service
-        res.status(lastDraw.status).send(lastDraw.payload)
+        res.status(combination.status).send(combination.payload)
+        next()
     } catch (error) {
         res.status(500).json(error)
     }
 }
 
-module.exports = { scrap }
+module.exports = { combined }
