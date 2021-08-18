@@ -17,22 +17,25 @@ module.exports = class ScrapAndInsertDrawService {
         try {
             // instancia a classe ScrapService
             const scrap = new ScrapService()
-            console.log('[scrapAndInsertDrawService] instancia ScrapService: ', scrap, '\n')
             // chama o serviço para buscar a última aposta
             const resultScrap = await scrap.scrapLastDraw()
-            console.log('[scrapAndInsertDrawService] depois de scrapLastDraw: ', resultScrap, '\n')
-            const drawDate = new Date()
-            const drawRound = 1010
+            if (resultScrap.status != 200) {
+                throw "Problema no scrap"
+            }
+            let yearLastDraw = resultScrap.payload.yearLastDraw
+            let monthLastDraw = resultScrap.payload.monthLastDraw - 1
+            let dayLastDraw = resultScrap.payload.dayLastDraw
+            let drawDate = new Date(yearLastDraw, monthLastDraw, dayLastDraw)
+            let drawRound = resultScrap.payload.lastDraw
             // instancia a classe DrawService
             const draw = new DrawService(drawDate, drawRound)
             // chama o serviço para criar uma nova aposta
             const resultNewDraw = await draw.NewDraw()
-            console.log('[scrapAndInsertDrawService] depois de NewDraw() ', resultNewDraw, '\n')
             // envia como retorno o payload recebido do Service
             if (resultNewDraw != null && resultNewDraw.status == 200) {
                 return { status: 200,
                     payload: { status: 200,
-                        message: `Último concurso ${drawRound} lido da página da Caixa foi inserido em ${resultNewDraw}.`
+                        message: `Último concurso ${drawRound} lido da página da Caixa foi inserido em ${resultNewDraw.payload.drawDate} e ${resultNewDraw.payload.drawRound}.`
                     }
                 }
             } else {

@@ -32,7 +32,6 @@ const url = 'http://www.loterias.caixa.gov.br/wps/portal/loterias/landing/megase
                 return results
             })
             await browser.close()
-            console.log('[ScrapService] depois do browser.close()', '\n')
             var drawNumberInPage = agaDois.filter( (item) => {
                 // Look for "Resultado Concurso"
                 let pattern = /Resultado Concurso/g
