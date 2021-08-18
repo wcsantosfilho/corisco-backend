@@ -1,7 +1,14 @@
 const schedule = require('node-schedule')
+const ScrapAndInsertDrawService = require('../services/scrapAndInsertDrawService')
 
-const job = schedule.scheduleJob('* * * 1 * *', function(){
+const job = schedule.scheduleJob('* * */1 * *', async function() {
     console.log('The answer to life, the universe, and everything!');
+
+    // instancia a classe ScrapService
+    const scrapAndInsertDrawService = new ScrapAndInsertDrawService()
+    // chama o serviço para buscar a última aposta e incluir em Draw
+    const combination = await scrapAndInsertDrawService.readCaixaPageAndInsertDraw()
+    console.log('[Cron] :', combination.status)
   });
 
 

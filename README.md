@@ -11,15 +11,18 @@ Aplicação Node.js + React para controlar a validade dos meus jogos da mega-sen
 - [x] rever todos os testes - nova estrutura de payload
 - [ ] esquema MVC
 - [x] testes de 'betService'
-- [ ] testes de 'drawService'
-- [ ] testes de 'expirationService'
+- [x] testes de 'drawService'
+- [x] testes de 'expirationService'
 - [x] corrigir "hanged" testes
+- [ ] tratamento de erro MongoDB fora do ar
+- [ ] testes de 'scrapAndInsertDrawService'
+- [ ] cronjob de 'scrapAndInsertDrawService'
 - [ ] esquema de variáveis de ambgiente: (dotenv?)
 - [ ] logger ou coisa parecida
 - [x] testes automáticos concurso realizado
 - [ ] envio de e-mail concurso expirado
 - [ ] deploy frontend heroku
-- [ ] leitura concurso realizado
+- [x] leitura concurso realizado
 - [ ] formulário para inclusão dos jogos
 - [ ] resolver issues de segurança
 - [ ] testes do front end
@@ -29,3 +32,4 @@ Aplicação Node.js + React para controlar a validade dos meus jogos da mega-sen
 - [ ] decorator = (o que é, como funciona?)
 - [X] const { xalala } = this.props // O que é destruct de xalala
 - [ ] COMMON JS vs ES6
+- [ ] ESLint
