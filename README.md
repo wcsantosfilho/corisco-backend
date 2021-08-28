@@ -1,5 +1,5 @@
 # corisco
-Aplicação Node.js + React para controlar a validade dos meus jogos da mega-sena
+Aplicação Node.js + React para controlar a validade dos meus jogos da Mega-sena
 
 # To do
 - [x] upgrade para React 16
