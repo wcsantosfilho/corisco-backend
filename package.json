@@ -6,10 +6,14 @@
   "scripts": {
     "dropTestDB": "mongo BDscripts/dropBDTeste.js",
     "test": "export NODE_ENV=test && mocha --delay --exit ./tests/**/*.js",
+<<<<<<< HEAD
     "test22": "export NODE_ENV=test && mocha --exit ./tests/draws.test.js",
     "test23": "export NODE_ENV=test && mocha --exit ./tests/expiration.test.js",
     "devMac": "export NODE_ENV=development && nodemon --watch src/loader.js",
     "devWin": "set NODE_ENV=development && nodemon --watch src/loader.js",
+=======
+    "dev": "export NODE_ENV=development && nodemon --watch src/loader.js",
+>>>>>>> scrap
     "debug": "export NODE_ENV=development && nodemon --watch --inspect src/loader.js",
     "production": "export NODE_ENV=production && export MONGODB_URI=mongodb://localhost/corisco && pm2 start src/loader.js --name corisco-backend",
     "start": "pm2 start src/loader.js --name corisco-backend"
@@ -22,6 +26,7 @@
   "dependencies": {
     "@sendgrid/mail": "^7.4.2",
     "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.9",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-query-int": "^3.0.0",
@@ -32,6 +37,7 @@
     "mongoose-paginate": "^5.0.3",
     "node-schedule": "^2.0.0",
     "pm2": "^4.5.1",
+    "puppeteer": "^9.1.1",
     "tap-spec": "^5.0.0",
     "tape": "^4.13.3"
   },

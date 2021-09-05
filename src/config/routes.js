@@ -3,6 +3,8 @@ const betRoutes = require('../api/routes/betRoutes')
 const drawRoutes = require('../api/routes/drawRoutes')
 const genericRoutes = require('../api/routes/genericRoutes')
 const expirationRoutes = require('../api/routes/expirationRoutes')
+const scrapRoutes = require('../api/routes/scrapRoutes')
+const scrapAndInsertDraw = require('../api/routes/scrapAndInsertDrawRoutes')
 
 module.exports = function(server) {
     /*
@@ -21,4 +23,6 @@ module.exports = function(server) {
     router.use('/getStatus', genericRoutes.getStatus)
     router.use('/addDraw', drawRoutes.addDraw)
     router.use('/checkIfLastBetIsEqualDraw', expirationRoutes.checkIfLastBetIsEqualDraw)
+    router.use('/scrap', scrapRoutes.scrap)
+    router.use('/scrapAndInsertDraw', scrapAndInsertDraw.combined)
 }
