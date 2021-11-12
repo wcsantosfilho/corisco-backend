@@ -18,10 +18,10 @@ const job = schedule.scheduleJob(cronVar, async function() {
     console.log('The answer to life, the universe, and everything!');
 
     // instancia a classe ScrapService
-    //const scrapAndInsertDrawService = new ScrapAndInsertDrawService()
+    const scrapAndInsertDrawService = new ScrapAndInsertDrawService()
     // chama o serviço para buscar a última aposta e incluir em Draw
-    //const combination = await scrapAndInsertDrawService.readCaixaPageAndInsertDraw()
-    //console.log('[Cron] :', combination.status)
+    const combination = await scrapAndInsertDrawService.readCaixaPageAndInsertDraw()
+    console.log('[Cron] :', combination.status)
   });
 
 
