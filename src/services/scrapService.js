@@ -18,7 +18,8 @@ const url = 'http://www.loterias.caixa.gov.br/wps/portal/loterias/landing/megase
     async scrapLastDraw() {
         try {
             const browser = await puppeteer.launch(
-                { args: ['--no-sandbox','--disable-setuid-sandbox'], headless: false }
+                { args: ['--disable-gpu','--disable-dev-shm-usage','--no-sandbox','--disable-setuid-sandbox'], 
+                headless: true }
             )
             const page = await browser.newPage()
             await page.goto(url)
