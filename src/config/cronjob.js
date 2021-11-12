@@ -11,9 +11,7 @@ const ScrapAndInsertDrawService = require('../services/scrapAndInsertDrawService
 // │    └──────────────────── minute (0 - 59)
 // └───────────────────────── second (0 - 59, OPTIONAL)
 // De hora em hora, do minuto "0" ao minuto "3", no segundo "0"
-const cronVar = '0 47-49 21 * * *';
-//const cronVar = '* 37 17 * * *';
-// const cronVar = '* */1 * * *';
+const cronVar = config.cronVar;
 
 const job = schedule.scheduleJob(cronVar, async function() {
     console.log('The answer to life, the universe, and everything!');
