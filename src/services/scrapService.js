@@ -17,7 +17,9 @@ const url = 'http://www.loterias.caixa.gov.br/wps/portal/loterias/landing/megase
     // busca dados do ultimo concurso na página web da Caixa Economica Federal
     async scrapLastDraw() {
         try {
-            const browser = await puppeteer.launch()
+            const browser = await puppeteer.launch(
+                { args: ['--no-sandbox','--disable-setuid-sandbox'], headless: false }
+            )
             const page = await browser.newPage()
             await page.goto(url)
             await page.waitForSelector('#conteudoresultado')
