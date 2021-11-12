@@ -6,13 +6,9 @@
   "scripts": {
     "dropTestDB": "mongo BDscripts/dropBDTeste.js",
     "test": "export NODE_ENV=test && mocha --delay --exit ./tests/**/*.js",
-    "test22": "export NODE_ENV=test && mocha --exit ./tests/draws.test.js",
-    "test23": "export NODE_ENV=test && mocha --exit ./tests/expiration.test.js",
-    "devMac": "export NODE_ENV=development && nodemon --watch src/loader.js",
-    "devWin": "set NODE_ENV=development && nodemon --watch src/loader.js",
     "dev": "export NODE_ENV=development && nodemon --watch src/loader.js",
     "debug": "export NODE_ENV=development && nodemon --watch --inspect src/loader.js",
-    "production": "export NODE_ENV=production && export MONGODB_URI=mongodb://localhost/corisco && pm2 start src/loader.js --name corisco-backend",
+    "production": "export NODE_ENV=production && pm2 start src/loader.js --name corisco-backend",
     "start": "pm2 start src/loader.js --name corisco-backend"
   },
   "keywords": [

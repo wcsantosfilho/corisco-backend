@@ -22,7 +22,7 @@ if (process.env.NODE_ENV.trim() == "development") {
 mongoose.connect(MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true })
 
 mongoose.connection.on('connected', function(){
-    console.log("Conn: Mongoose default connection is open to ", MONGO_URI);
+    console.log("Conn: Mongoose default connection is open to ", process.env.NODE_ENV);
 })
 mongoose.connection.on('error', function(err){
     console.log("Err: Mongoose default connection has occured "+err+" error");
