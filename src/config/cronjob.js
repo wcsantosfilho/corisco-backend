@@ -1,3 +1,4 @@
+const config = require('./config')
 const schedule = require('node-schedule')
 const ScrapAndInsertDrawService = require('../services/scrapAndInsertDrawService')
 
