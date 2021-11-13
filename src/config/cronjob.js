@@ -11,20 +11,20 @@ const https = require('https')
 // │    │    └─────────────── hour (0 - 23)
 // │    └──────────────────── minute (0 - 59)
 // └───────────────────────── second (0 - 59, OPTIONAL)
-// De hora em hora, do minuto "0" ao minuto "3", no segundo "0"
+// De hora em hora, do minuto "0" ao minuto "3", no segundo "0" = '0 0-3 * * * *'
 const cronVar = config.cronVar;
 console.log('[cronjob]'+'cronVar: '+cronVar)
 console.log('[cronjob]'+'backendURL: '+config.backendURL)
 console.log('[cronjob]'+'port:'+config.backendPORT)
 const job = schedule.scheduleJob(cronVar, async function() {
     console.log('The answer to life, the universe, and everything! ');
-//      "path": "/api/scrapAndInsertDraw",
+
 
     const options = {
       "method": "GET",
       "hostname": config.backendURL,
       "port": config.backendPORT,
-      "path": "/api/getStatus",
+      "path": "/api/scrapAndInsertDraw",
       "headers": {
         "content-type": "application/x-www-form-urlencoded"
       }
