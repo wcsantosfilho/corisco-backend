@@ -1,6 +1,7 @@
 const config = require('./config')
 const schedule = require('node-schedule')
-const ScrapAndInsertDrawService = require('../services/scrapAndInsertDrawService')
+//const ScrapAndInsertDrawService = require('../services/scrapAndInsertDrawService')
+const ScrapService = require('../services/scrapService')
 
 // *    *    *    *    *    *
 // ┬    ┬    ┬    ┬    ┬    ┬
@@ -13,15 +14,22 @@ const ScrapAndInsertDrawService = require('../services/scrapAndInsertDrawService
 // └───────────────────────── second (0 - 59, OPTIONAL)
 // De hora em hora, do minuto "0" ao minuto "3", no segundo "0"
 const cronVar = config.cronVar;
-
+console.log('[cronjob]'+cronVar);
 const job = schedule.scheduleJob(cronVar, async function() {
     console.log('The answer to life, the universe, and everything! ');
 
     // instancia a classe ScrapService
-    const scrapAndInsertDrawService = new ScrapAndInsertDrawService()
+    const scrap = new ScrapService()
+
+    // chama o serviço para buscar a última aposta
+    const resultScrap = await scrap.scrapLastDraw()
+    console.log('[cronjob]'+resultScrap.status+'|'+resultScrap.payload.lastDraw)
+
+    // instancia a classe ScrapAndInsertDrawServiceService
+    // const scrapAndInsertDrawService = new ScrapAndInsertDrawService()
     // chama o serviço para buscar a última aposta e incluir em Draw
-    const combination = await scrapAndInsertDrawService.readCaixaPageAndInsertDraw()
-    console.log('[ScrapANdInsert] :', combination.status)
+    // const combination = await scrapAndInsertDrawService.readCaixaPageAndInsertDraw()
+    // console.log('[ScrapAndInsert] :', combination.status)
   });
 
 
