@@ -1,7 +1,6 @@
 const config = require('./config')
 const schedule = require('node-schedule')
-const ScrapAndInsertDrawService = require('../services/scrapAndInsertDrawService')
-const ScrapService = require('../services/scrapService')
+const https = require('https')
 
 // *    *    *    *    *    *
 // ┬    ┬    ┬    ┬    ┬    ┬
@@ -14,23 +13,36 @@ const ScrapService = require('../services/scrapService')
 // └───────────────────────── second (0 - 59, OPTIONAL)
 // De hora em hora, do minuto "0" ao minuto "3", no segundo "0"
 const cronVar = config.cronVar;
-console.log('[cronjob]'+cronVar);
+console.log('[cronjob]'+'cronVar: '+cronVar)
+console.log('[cronjob]'+'backendURL: '+config.backendURL)
+console.log('[cronjob]'+'port:'+config.backendPORT)
 const job = schedule.scheduleJob(cronVar, async function() {
     console.log('The answer to life, the universe, and everything! ');
+//      "path": "/api/scrapAndInsertDraw",
 
-    // instancia a classe ScrapService
-    const scrap = new ScrapService()
-    // chama o serviço para buscar a última aposta
-    const resultScrap = await scrap.scrapLastDraw()
-    console.log('[cronjob]'+resultScrap.status+'|'+resultScrap.payload.lastDraw)
+    const options = {
+      "method": "GET",
+      "hostname": config.backendURL,
+      "port": config.backendPORT,
+      "path": "/api/getStatus",
+      "headers": {
+        "content-type": "application/x-www-form-urlencoded"
+      }
+    };
 
-    // instancia a classe ScrapAndInsertDrawServiceService
-    console.log('[cronjob] '+'**antes do scrapAndInserDrawService')
-    const scrapAndInsertDrawService = new ScrapAndInsertDrawService()
-    // chama o serviço para buscar a última aposta e incluir em Draw
-    console.log('[cronjob] '+'**depois do scrapAndInserDrawService:'+scrapAndInsertDrawService.xpto)
-    const combination = await scrapAndInsertDrawService.readCaixaPageAndInsertDraw()
-    console.log('[cronjob] :', combination.status)
+    const req = https.request(options, res => {
+      console.log(`[cronjob] statusCode: ${res.statusCode}`)
+    
+      res.on('data', d => {
+        process.stdout.write(d)
+        })
+    })
+    
+    req.on('error', error => {
+      console.error(error)
+    })
+    
+    req.end()
   });
 
 
