@@ -1,6 +1,6 @@
 const config = require('./config')
 const schedule = require('node-schedule')
-//const ScrapAndInsertDrawService = require('../services/scrapAndInsertDrawService')
+const ScrapAndInsertDrawService = require('../services/scrapAndInsertDrawService')
 const ScrapService = require('../services/scrapService')
 
 // *    *    *    *    *    *
@@ -20,16 +20,17 @@ const job = schedule.scheduleJob(cronVar, async function() {
 
     // instancia a classe ScrapService
     const scrap = new ScrapService()
-
     // chama o serviço para buscar a última aposta
     const resultScrap = await scrap.scrapLastDraw()
     console.log('[cronjob]'+resultScrap.status+'|'+resultScrap.payload.lastDraw)
 
     // instancia a classe ScrapAndInsertDrawServiceService
-    // const scrapAndInsertDrawService = new ScrapAndInsertDrawService()
+    console.log('[cronjob] '+'**antes do scrapAndInserDrawService')
+    const scrapAndInsertDrawService = new ScrapAndInsertDrawService()
     // chama o serviço para buscar a última aposta e incluir em Draw
-    // const combination = await scrapAndInsertDrawService.readCaixaPageAndInsertDraw()
-    // console.log('[ScrapAndInsert] :', combination.status)
+    console.log('[cronjob] '+'**depois do scrapAndInserDrawService:'+scrapAndInsertDrawService.xpto)
+    const combination = await scrapAndInsertDrawService.readCaixaPageAndInsertDraw()
+    console.log('[cronjob] :', combination.status)
   });
 
 

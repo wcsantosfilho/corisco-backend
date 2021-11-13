@@ -14,10 +14,13 @@ module.exports = class DrawService {
     // Adiciona um nova aposta no banco
     async NewDraw() {
         try {
+            console.log('[drawService]'+'**inicio do newdraw')
             // Regra de negócio: não pode haver sorteio duplicado
             const findResult = await LotteryModel.draws.find({
                 drawRound: this.drawRound,
             })
+            console.log('[drawService]'+findResult)
+            console.log('[drawService]'+findResult.length)
 
             // findResult.lenght deve set igual a zero (not found) para poder inserir o sorteio
             if ( findResult.length == 0) {
