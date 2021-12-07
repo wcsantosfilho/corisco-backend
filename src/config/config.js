@@ -12,7 +12,7 @@ if (config.environment == "production") {
     console.log('[config] '+'Production')
     config.mongodbURI = process.env.MONGODB_URI_PROD
     config.backendURL = process.env.BACKEND_URL_PROD
-    config.backendPORT = process.env.BACKEND_PORT_PROD
+    config.backendPORT = process.env.PORT || process.env.BACKEND_PORT_PROD
 }
 if (config.environment == "test") {
     console.log('[config] '+'Test')
