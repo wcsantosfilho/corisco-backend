@@ -18,13 +18,13 @@ if (config.environment == "test") {
     console.log('[config] '+'Test')
     config.mongodbURI = process.env.MONGODB_URI_TEST
     config.backendURL = process.env.BACKEND_URL_TEST
-    config.backendPORT = process.env.BACKEND_PORT_TEST
+    config.backendPORT = process.env.PORT || process.env.BACKEND_PORT_TEST
 }
 if (config.environment == "development") {
     console.log('[config] '+'Development')
     config.mongodbURI = process.env.MONGODB_URI_DEV
     config.backendURL = process.env.BACKEND_URL_DEV
-    config.backendPORT = process.env.BACKEND_PORT_DEV
+    config.backendPORT = process.env.PORT || process.env.BACKEND_PORT_DEV
 }
 
 module.exports = config;
