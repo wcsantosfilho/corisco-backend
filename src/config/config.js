@@ -1,9 +1,6 @@
 const dotenv = require('dotenv')
 
-const result = dotenv.config({silent: true})
-if (result.error) {
-  throw result.error
-}
+dotenv.config({silent: true})
 
 var config = {};
 config.environment = process.env.NODE_ENV.trim()
