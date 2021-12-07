@@ -50,7 +50,7 @@ const job = schedule.scheduleJob(cronVar, async function() {
 // https://github.com/sendgrid/sendgrid-nodejs
 
 // const sgMail = require('@sendgrid/mail')
-// sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+// sgMail.setApiKey(config.sendgridApiKey)
 // const msg = {
 //   to: 'walter.filho@bcredi.com.br', // Change to your recipient
 //   from: 'wcsantosfilho@gmail.com', // Change to your verified sender
@@ -76,7 +76,7 @@ const job = schedule.scheduleJob(cronVar, async function() {
   //   "port": null,
   //   "path": "/v3/mail/send",
   //   "headers": {
-  //     "authorization": `Bearer ${process.env.SENDGRID_API_KEY}`,
+  //     "authorization": `Bearer ${config.sendgridApiKey}`,
   //     "content-type": "application/json"
   //   }
   // };

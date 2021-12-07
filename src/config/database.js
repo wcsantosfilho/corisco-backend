@@ -1,28 +1,10 @@
 const mongoose = require('mongoose')
 const config = require('./config')
 
-/*
-    * Set the database according with environment
-    * Should be changed by a configuration file later
-*/
-if (process.env.NODE_ENV.trim() == "production") {
-    console.log("entrou no production")
-    MONGO_URI = config.production.mongodbURI
-}
-if (process.env.NODE_ENV.trim() == "test") {
-    console.log("entrou no test")
-    MONGO_URI = config.test.mongodbURI
-}
-if (process.env.NODE_ENV.trim() == "development") {
-    console.log("entrou no development")
-    MONGO_URI = config.development.mongodbURI
-}
-
-
-mongoose.connect(MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(config.mongodbURI, {useNewUrlParser: true, useUnifiedTopology: true })
 
 mongoose.connection.on('connected', function(){
-    console.log("Conn: Mongoose default connection is open to ", process.env.NODE_ENV);
+    console.log("Conn: Mongoose default connection is open to ", config.environment);
 })
 mongoose.connection.on('error', function(err){
     console.log("Err: Mongoose default connection has occured "+err+" error");

@@ -1,4 +1,5 @@
-const port = process.env.PORT || 5000
+const config = require('./config')
+const port = config.backendPORT || 5000
 
 const bodyParser = require('body-parser')
 const express = require('express')
@@ -14,7 +15,7 @@ server.use(queryParser())
 server.listen(port, () => {
     console.log(`Backend is running on port ${port} at ${server.get('env')}.`)
     console.log('vv server start vv')
-    console.log('Server is listening on port ' + process.env.PORT + '|' + port);
+    console.log('Server is listening on port ' + config.PORT + '|' + port);
     console.log(server.get('env'))
     console.log('^^ server start ^^')
 })

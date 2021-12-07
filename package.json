@@ -6,7 +6,6 @@
   "scripts": {
     "dropTestDB": "mongo BDscripts/dropBDTeste.js",
     "test": "export NODE_ENV=test && mocha --delay --exit ./tests/**/*.js",
-    "devMac": "export NODE_ENV=development && export CRON_VAR='0 */1 * * * *' && export MONGODB_URI='mongodb+srv://coriscoDbUser:66JywPUeIvPGUGGM@corisco.vq9ow.mongodb.net/corisco?retryWrites=true&w=majority' && nodemon --watch src/loader.js",
     "dev": "export NODE_ENV=development && nodemon --watch src/loader.js",
     "debug": "export NODE_ENV=development && nodemon --watch --inspect src/loader.js",
     "production": "export NODE_ENV=production && pm2 start src/loader.js --name corisco-backend",
@@ -22,6 +21,7 @@
     "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.9",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-query-int": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
@@ -41,6 +41,6 @@
     "supertest": "^6.0.1"
   },
   "engines": {
-    "node": "12.x"
+    "node": "17.x"
   }
 }
