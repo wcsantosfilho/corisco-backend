@@ -1,4 +1,5 @@
 const config = require('./config')
+const logger = require('heroku-logger')
 const schedule = require('node-schedule')
 const https = require('https')
 
@@ -13,12 +14,11 @@ const https = require('https')
 // └───────────────────────── second (0 - 59, OPTIONAL)
 // De hora em hora, do minuto "0" ao minuto "3", no segundo "0" = '0 0-3 * * * *'
 const cronVar = config.cronVar;
-console.log('[cronjob]'+'cronVar: '+cronVar)
-console.log('[cronjob]'+'backendURL: '+config.backendURL)
-console.log('[cronjob]'+'port:'+config.backendPORT)
+logger.info(`[cronjob] cronVar: ${cronVar}`)
+logger.info(`[cronjob] backendURL: ${config.backendURL}`)
+logger.info(`[cronjob] port: ${config.backendPORT}`)
 const job = schedule.scheduleJob(cronVar, async function() {
-    console.log('The answer to life, the universe, and everything! ');
-
+    logger.info(`[cronjob] executing...`)
 
     const options = {
       "method": "GET",
@@ -31,15 +31,15 @@ const job = schedule.scheduleJob(cronVar, async function() {
     };
 
     const req = https.request(options, res => {
-      console.log(`[cronjob] statusCode: ${res.statusCode}`)
+      logger.info(`[cronjob] statusCode: ${res.statusCode}`)
     
       res.on('data', d => {
-        process.stdout.write(d)
+        logger.info(`[cronjob] data: ${d}`)
         })
     })
     
     req.on('error', error => {
-      console.error(error)
+      logger.trace(error)
     })
     
     req.end()
