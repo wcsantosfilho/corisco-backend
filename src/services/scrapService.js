@@ -12,7 +12,6 @@ const url = 'http://www.loterias.caixa.gov.br/wps/portal/loterias/landing/megase
  module.exports = class ScrapService {
     constructor (scrapStatus = null) {
         this.scrapStatus = scrapStatus
-        this.xpto = 'XPTO'
     }
 
     // busca dados do ultimo concurso na página web da Caixa Economica Federal

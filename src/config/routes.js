@@ -21,6 +21,7 @@ module.exports = function(server) {
     router.use('/getCurrentBet', betRoutes.getCurrentBet)
     router.use('/getBets', betRoutes.getBets)
     router.use('/getStatus', genericRoutes.getStatus)
+    router.use('/sendMail', genericRoutes.sendMail)
     router.use('/addDraw', drawRoutes.addDraw)
     router.use('/checkIfLastBetIsEqualDraw', expirationRoutes.checkIfLastBetIsEqualDraw)
     router.use('/scrap', scrapRoutes.scrap)
