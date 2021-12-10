@@ -1,4 +1,5 @@
 const express = require('express')
+const logger = require('heroku-logger')
 const mailService = require('../../services/mailService')
 
 /*
@@ -15,7 +16,7 @@ getStatus = async (req, res, next) => {
         res.status(result.status).send(result.payload)
         next()
     } catch (error) {
-        console.log(error)
+        logger.error(error)
         res.status(500).json(error)
     }
 }
@@ -35,7 +36,7 @@ sendMail = async (req, res, next) => {
         res.status(result.status).send(result.payload)
         next()
     } catch (error) {
-        console.log(error)
+        logger.error(error)
         res.status(500).json(error)
     }
 }

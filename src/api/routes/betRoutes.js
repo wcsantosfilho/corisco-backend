@@ -1,4 +1,5 @@
 const express = require('express')
+const logger = require('heroku-logger')
 const BetService = require('../../services/betService')
 
 /* 
@@ -23,6 +24,7 @@ addBet = async (req, res, next) => {
         // envia como retorno o payload recebido do Service
         res.status(resultNewBet.status).send(resultNewBet.payload)
     } catch (error) {
+        logger.error(error)
         res.status(500).json(error)
     }
 }
@@ -42,7 +44,7 @@ getCurrentBet = async (req, res, next) => {
         res.status(resultLastBet.status).send(resultLastBet.payload)
         next()
     } catch (error) {
-        console.log(error)
+        logger.error(error)
         res.status(500).json(error)
     }
 }
@@ -62,7 +64,7 @@ getBets = async (req, res, next) => {
         res.status(resultBets.status).send(resultBets.payload)
         next()
     } catch (error) {
-        console.log(error)
+        logger.error(error)
         res.status(500).json(error)
     }
 }

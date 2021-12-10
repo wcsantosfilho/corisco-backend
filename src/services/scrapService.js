@@ -2,6 +2,7 @@ const cheerio = require('cheerio');
 const { data } = require('cheerio/lib/api/attributes');
 const { isNumber } = require('lodash');
 const puppeteer = require('puppeteer');
+const logger = require('heroku-logger')
 
 /* scrapService
  * Esta classe faz a leitura do site de loterias da Caixa para buscar o último concurso realizado
@@ -62,12 +63,12 @@ const url = 'http://www.loterias.caixa.gov.br/wps/portal/loterias/landing/megase
                     yearLastDraw: yearLastDraw,
                     textInCaixaWebPage: textInCaixaWebPage }
             }
-        } catch (e) {
-            console.log('Erro no catch: ' + e)
+        } catch (error) {
+            logger.error('Erro no catch: ' + error)
             return { status: 500, 
                 payload: { status: 500,
                     messagem: "Erro inesperado",
-                    stack: JSON.stringify(e.message)
+                    stack: JSON.stringify(error.message)
                 }
             }
         }

@@ -1,4 +1,7 @@
 const LotteryModel = require('../models/lotteryModel')
+const logger = require('heroku-logger')
+const path = require('path');
+const scriptName = path.basename(__filename);
 
 /* drawService
  * Esta classe de 'Service' expõe metodos para a camada 'route'. Estes métodos chamam
@@ -23,21 +26,22 @@ module.exports = class BetService {
             // findResult.lenght deve set igual a zero (not found) para poder inserir a aposta
             if ( findResult.length == 0) {
                 const betRecord = await new LotteryModel.bets( {...this} ).save()
-                    return { status: 200,
-                        payload: betRecord
-                    }
+                logger.info(`[${scriptName}] save ${betRecord}`)
+                return { status: 200,
+                    payload: betRecord
+                }
             } else {
                 return { status: 422,
                     payload: { status: 422,
                         message: "Registro duplicado para esta aposta" }
                     }
             }
-        } catch (e) {
-            console.log(e)
+        } catch (error) {
+            logger.error(e)
             return { status: 500, 
                 payload: { status: 500,
                     messagem: "Erro inesperado",
-                    stack: JSON.stringify(e)
+                    stack: JSON.stringify(error)
                 }
             }
         }
@@ -58,12 +62,12 @@ module.exports = class BetService {
                         messagem: "Nenhuma aposta encontrada" }
                     }
             }
-        } catch (e) {
-            console.log(e)
+        } catch (error) {
+            logger.error(error)
             return { status: 500, 
                 payload: { status: 500,
                     messagem: "Erro inesperado",
-                    stack: JSON.stringify(e)
+                    stack: JSON.stringify(error)
                 }
             }
         }        
@@ -84,12 +88,12 @@ module.exports = class BetService {
                         message: "Nenhuma aposta encontrada" }
                     }
             }
-        } catch (e) {
-            console.log(e)
+        } catch (error) {
+            logger.error(error)
             return { status: 500, 
                 payload: { status: 500,
                     messagem: "Erro inesperado",
-                    stack: JSON.stringify(e)
+                    stack: JSON.stringify(error)
                 }
             }
         }

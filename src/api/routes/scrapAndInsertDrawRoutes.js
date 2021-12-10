@@ -1,4 +1,5 @@
 const { modelNames } = require('mongoose')
+const logger = require('heroku-logger')
 const ScrapAndInsertDraw = require('../../services/scrapAndInsertDrawService')
 
 /* 
@@ -21,6 +22,7 @@ combined = async (req, res, next) => {
         res.status(combination.status).send(combination.payload)
         next()
     } catch (error) {
+        logger.error(error)
         res.status(500).json(error)
     }
 }

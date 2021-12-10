@@ -1,4 +1,5 @@
 const LotteryModel = require('../models/lotteryModel')
+const logger = require('heroku-logger')
 
 /* drawService
  * Esta classe de 'Service' expõe metodos para a camada 'route'. Estes métodos
@@ -31,12 +32,12 @@ module.exports = class DrawService {
                         message: "Registro duplicado para este sorteio" }
                     }
             }
-        } catch (e) {
-            console.log(e)
+        } catch (error) {
+            logger.error(error)
             return { status: 500, 
                 payload: { status: 500,
                     messagem: "Erro inesperado",
-                    stack: JSON.stringify(e)
+                    stack: JSON.stringify(error)
                 }
             }
         }
@@ -57,12 +58,12 @@ module.exports = class DrawService {
                         messagem: "Nenhum concurso encontrado" }
                     }
             }
-        } catch (e) {
-            console.log(e)
+        } catch (error) {
+            logger.error(error)
             return { status: 500, 
                 payload: { status: 500,
                     messagem: "Erro inesperado",
-                    stack: JSON.stringify(e)
+                    stack: JSON.stringify(error)
                 }
             }
         }        

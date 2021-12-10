@@ -8,7 +8,6 @@ const express = require('express')
 const server = express()
 const cors = require('cors')
 const queryParser = require('express-query-int')
-const { Logger } = require('heroku-logger')
 
 server.use(bodyParser.urlencoded({ extended: true }))
 server.use(bodyParser.json())

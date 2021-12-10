@@ -1,23 +1,24 @@
 const mongoose = require('mongoose')
 const config = require('./config')
+const logger = require('heroku-logger')
 
 mongoose.connect(config.mongodbURI, {useNewUrlParser: true, useUnifiedTopology: true })
 
 mongoose.connection.on('connected', function(){
-    console.log("Conn: Mongoose default connection is open to ", config.environment);
+    logger.info("Conn: Mongoose default connection is open to ", config.environment);
 })
 mongoose.connection.on('error', function(err){
-    console.log("Err: Mongoose default connection has occured "+err+" error");
+    logger.info("Err: Mongoose default connection has occured "+err+" error");
 })
 mongoose.connection.on('disconnected', function(){
-    console.log("Disconn: Mongoose default connection is disconnected");
+    logger.info("Disconn: Mongoose default connection is disconnected");
 })
 mongoose.connection.on('reconnected', function() {
-    console.log('Reconn: Reconnected to MongoDB');
+    logger.info('Reconn: Reconnected to MongoDB');
 })
 process.on('SIGINT', function(){
     mongoose.connection.close(function(){
-        console.log("Mongoose default connection is disconnected due to application termination");
+        logger.info("Mongoose default connection is disconnected due to application termination");
         process.exit(0)
     })
 })

@@ -1,4 +1,5 @@
 const { modelNames } = require('mongoose')
+const logger = require('heroku-logger')
 const ScrapService = require('../../services/scrapService')
 
 /* 
@@ -20,6 +21,7 @@ scrap = async (req, res, next) => {
         // envia como retorno o payload recebido do Service
         res.status(lastDraw.status).send(lastDraw.payload)
     } catch (error) {
+        logger.error(error)
         res.status(500).json(error)
     }
 }

@@ -1,6 +1,6 @@
 const express = require('express')
 const ExpirationService = require('../../services/expirationService')
-
+const logger = require('heroku-logger')
 
 /* 
  * Endpoints da API
@@ -22,6 +22,7 @@ checkIfLastBetIsEqualDraw = async (req, res, next) => {
         // envia como retorno o payload recebido do Service
         res.status(result.status).send(result.payload)
     } catch (error) {
+        logger.error(error)
         res.status(500).json(error)
     }
 }

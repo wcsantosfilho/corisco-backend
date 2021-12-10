@@ -1,4 +1,5 @@
 const DrawService = require('../../services/drawService')
+const logger = require('heroku-logger')
 
 /* 
  * Endpoints da API
@@ -22,6 +23,7 @@ addDraw = async (req, res, next) => {
         // envia como retorno o payload recebido do Service
         res.status(resultNewDraw.status).send(resultNewDraw.payload)
     } catch (error) {
+        logger.error(error)
         res.status(500).json(error)
     }
 }

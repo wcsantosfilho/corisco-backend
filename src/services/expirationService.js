@@ -1,5 +1,6 @@
 const DrawService = require('./drawService')
 const BetService = require('./betService')
+const logger = require('heroku-logger')
 
 /* expirationService
  * Esta classe usa métodos de duas outras classes, bet e draw, para 
@@ -65,12 +66,12 @@ module.exports = class ExpirationService {
                     }
                 }
             }
-        } catch (e) {
-            console.log(e)
+        } catch (error) {
+            logger.error(error)
             return { status: 500, 
                 payload: { status: 500,
                     messagem: "Erro inesperado",
-                    stack: JSON.stringify(e)
+                    stack: JSON.stringify(error)
                 }
             }
         }

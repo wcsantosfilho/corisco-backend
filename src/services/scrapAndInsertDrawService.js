@@ -1,5 +1,6 @@
 const DrawService = require('./drawService')
 const ScrapService = require('./scrapService')
+const logger = require('heroku-logger')
 
 /* drawResultService
  * Esta classe usa métodos de duas outras classes, scrap e draw, para 
@@ -46,12 +47,12 @@ module.exports = class ScrapAndInsertDrawService {
                 }
 
             }
-        } catch (e) {
-            console.log('Erro no catch: ' + e)
+        } catch (error) {
+            logger.error('Erro no catch: ' + error)
             return { status: 500, 
                 payload: { status: 500,
                     messagem: "Erro inesperado",
-                    stack: JSON.stringify(e.message)
+                    stack: JSON.stringify(error.message)
                 }
             }
         }

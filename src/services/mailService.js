@@ -1,5 +1,6 @@
 const https = require('https')
 const config = require('../config/config')
+const logger = require('heroku-logger')
 
 /* mailService
  * Esta classe envia e-mails pelo serviço do Sendgrid
@@ -33,7 +34,7 @@ const config = require('../config/config')
     
                 res.on("end", function () {
                     var body = Buffer.concat(chunks);
-                    console.log(body.toString());
+                    logger.info(body.toString());
                 });
             });
   
@@ -45,12 +46,12 @@ const config = require('../config/config')
                 reply_to: { email: 'wcsantosfilho@gmail.com', name: 'Walter Santos Filho' },
                 template_id: 'd-8e3c4b535350446b92481a8a5f2fc976' }));
             req.end();
-        } catch (e) {
-            console.log('Erro no catch: ' + e)
+        } catch (error) {
+            logger.error('Erro no catch: ' + error)
             return { status: 500, 
                 payload: { status: 500,
                     messagem: "Erro inesperado",
-                    stack: JSON.stringify(e.message)
+                    stack: JSON.stringify(error.message)
                 }
             }
         }
