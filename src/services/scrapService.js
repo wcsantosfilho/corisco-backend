@@ -23,10 +23,9 @@ const url = 'http://www.loterias.caixa.gov.br/wps/portal/loterias/landing/megase
             logger.info(`[${scriptName}] scrapLastDraw`)
             const browser = await puppeteer.launch(
                 { args: [
-                    '--disable-gpu',
-                    '--disable-dev-shm-usage',
                     '--no-sandbox',
                     '--disable-setuid-sandbox',
+                    '--disable-dev-shm-usage',
                     '--single-process'
                 ], 
                 headless: true }
