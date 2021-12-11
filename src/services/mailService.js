@@ -1,6 +1,8 @@
 const https = require('https')
 const config = require('../config/config')
 const logger = require('heroku-logger')
+const path = require('path');
+const scriptName = path.basename(__filename);
 
 /* mailService
  * Esta classe envia e-mails pelo serviço do Sendgrid
@@ -14,6 +16,7 @@ const logger = require('heroku-logger')
     // envia template de e-mail pelo Twillio/Sendgrid
     async sendEmail() {
         try {
+            logger.info(`[${scriptName}] sendEmail`)
             var options = {
                 "method": "POST",
                 "hostname": "api.sendgrid.com",
@@ -34,7 +37,7 @@ const logger = require('heroku-logger')
     
                 res.on("end", function () {
                     var body = Buffer.concat(chunks);
-                    logger.info(body.toString());
+                    logger.info(`[${scriptName}] ${body.toString()}`);
                 });
             });
   

@@ -1,5 +1,7 @@
 const LotteryModel = require('../models/lotteryModel')
 const logger = require('heroku-logger')
+const path = require('path');
+const scriptName = path.basename(__filename);
 
 /* drawService
  * Esta classe de 'Service' expõe metodos para a camada 'route'. Estes métodos
@@ -15,6 +17,7 @@ module.exports = class DrawService {
     // Adiciona um nova aposta no banco
     async NewDraw() {
         try {
+            logger.info(`[${scriptName}] newDraw`)
             // Regra de negócio: não pode haver sorteio duplicado
             const findResult = await LotteryModel.draws.find({
                 drawRound: this.drawRound,
@@ -46,6 +49,7 @@ module.exports = class DrawService {
     // Busca o última concurso no banco
     async getLastDraw() {
         try {
+            logger.info(`[${scriptName}] getLastDraw`)
             const drawRecord = LotteryModel.draws
             const findResult = await drawRecord.find().limit(1).sort( { drawRound: -1 })
             if ( findResult.length > 0) {

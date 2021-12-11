@@ -1,6 +1,8 @@
 const DrawService = require('./drawService')
 const ScrapService = require('./scrapService')
 const logger = require('heroku-logger')
+const path = require('path');
+const scriptName = path.basename(__filename);
 
 /* drawResultService
  * Esta classe usa métodos de duas outras classes, scrap e draw, para 
@@ -16,6 +18,7 @@ module.exports = class ScrapAndInsertDrawService {
     // insert Draw read from Caixa website
     async readCaixaPageAndInsertDraw() {
         try {
+            logger.info(`[${scriptName}] readCaixaPageAndInsertDraw`)
             // instancia a classe ScrapService
             const scrap = new ScrapService()
             // chama o serviço para buscar a última aposta
@@ -23,6 +26,7 @@ module.exports = class ScrapAndInsertDrawService {
             if (resultScrap.status != 200) {
                 throw "Problema no scrap"
             }
+            logger.info(`[${scriptName}] readCaixaPageAndInsertDraw ${resultScrap.status}`)
             let yearLastDraw = resultScrap.payload.yearLastDraw
             let monthLastDraw = resultScrap.payload.monthLastDraw - 1
             let dayLastDraw = resultScrap.payload.dayLastDraw

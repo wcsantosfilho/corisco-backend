@@ -17,6 +17,7 @@ module.exports = class BetService {
     // Adiciona um nova aposta no banco
     async NewBet() {
         try {
+            logger.info(`[${scriptName}] newBet`)
             // Regra de negócio: não pode haver aposta duplicada
             const findResult = await LotteryModel.bets.find({
                 initialRound: this.initialRound,
@@ -50,6 +51,7 @@ module.exports = class BetService {
     // Busca a última aposta no banco
     async getLastBet() {
         try {
+            logger.info(`[${scriptName}] getLastBet`)
             const betRecord = LotteryModel.bets
             const findResult = await betRecord.find().limit(1).sort( { finalRound: -1 })
             if ( findResult.length > 0) {
@@ -76,6 +78,7 @@ module.exports = class BetService {
     // Busca todas as apostas do banco
     async getBets() {
         try {
+            logger.info(`[${scriptName}] getBets`)
             const betRecord = LotteryModel.bets
             const findResult = await betRecord.find()
             if ( findResult.length != 0) {

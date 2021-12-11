@@ -18,7 +18,9 @@ Aplicação Node.js + React para controlar a validade dos meus jogos da Mega-sen
 - [ ] testes de 'scrapAndInsertDrawService'
 - [x] cronjob de 'scrapAndInsertDrawService'
 - [x] esquema de variáveis de ambgiente: (dotenv)
-- [ ] logger ou coisa parecida
+- [x] logger ou coisa parecida
+- [x] logger.info nos Services
+- [ ] logger.info nas Routes
 - [x] testes automáticos concurso realizado
 - [ ] envio de e-mail concurso expirado
 - [ ] deploy frontend heroku

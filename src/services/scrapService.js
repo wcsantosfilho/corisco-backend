@@ -3,6 +3,8 @@ const { data } = require('cheerio/lib/api/attributes');
 const { isNumber } = require('lodash');
 const puppeteer = require('puppeteer');
 const logger = require('heroku-logger')
+const path = require('path');
+const scriptName = path.basename(__filename);
 
 /* scrapService
  * Esta classe faz a leitura do site de loterias da Caixa para buscar o último concurso realizado
@@ -18,6 +20,7 @@ const url = 'http://www.loterias.caixa.gov.br/wps/portal/loterias/landing/megase
     // busca dados do ultimo concurso na página web da Caixa Economica Federal
     async scrapLastDraw() {
         try {
+            logger.info(`[${scriptName}] scrapLastDraw`)
             const browser = await puppeteer.launch(
                 { args: ['--disable-gpu','--disable-dev-shm-usage','--no-sandbox','--disable-setuid-sandbox'], 
                 headless: true }
@@ -54,6 +57,7 @@ const url = 'http://www.loterias.caixa.gov.br/wps/portal/loterias/landing/megase
             if (lastDraw == null || dayLastDraw == null || monthLastDraw == null || yearLastDraw == null) {
                 throw "Problem in scrap"
             }
+            logger.info(`[${scriptName}] scrapLastDraw ${lastDraw}`)
 
             return { status: 200,
                 payload: { status: 200,

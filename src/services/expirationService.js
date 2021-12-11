@@ -1,6 +1,8 @@
 const DrawService = require('./drawService')
 const BetService = require('./betService')
 const logger = require('heroku-logger')
+const path = require('path');
+const scriptName = path.basename(__filename);
 
 /* expirationService
  * Esta classe usa métodos de duas outras classes, bet e draw, para 
@@ -21,6 +23,7 @@ module.exports = class ExpirationService {
     // last bet is equal last draw?
     async checkIfLastBetIsEqualDraw() {
         try {
+            logger.info(`[${scriptName}] checkIfLastBetIsEqualDraw`)
             // instancia a classe DrawService
             const draw = new DrawService()
             // instancia a classe BetService
