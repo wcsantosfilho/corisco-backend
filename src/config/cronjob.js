@@ -33,13 +33,14 @@ const job = schedule.scheduleJob(cronVar, async function() {
     let httpType = config.environment == 'production' ? 'https://': 'http://'
     logger.info(`[cronjob] httpType: ${httpType}`)
     let urlComplete = httpType + options.hostname + ':' + options.port + options.path
-    fetch(urlComplete, {
+    const apiResponse = await fetch(urlComplete, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
         }
-      }).then (res => res.json())
-      .then(json => logger.info(`[cronjob] fetch: ${JSON.stringify(json, null, 2)}`))
+      })
+    const apiResponseJson = await apiResponse.json()
+    console.log(apiResponseJson)
     
   });
 
