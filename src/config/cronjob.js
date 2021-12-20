@@ -33,6 +33,7 @@ const job = schedule.scheduleJob(cronVar, async function() {
     let httpType = config.environment == 'production' ? 'https://': 'http://'
     logger.info(`[cronjob] httpType: ${httpType}`)
     let urlComplete = httpType + options.hostname + ':' + options.port + options.path
+    urlComplete = 'http://viacep.com.br/ws/81010310/json'
     const apiResponse = await fetch(urlComplete, {
       method: 'GET',
       headers: {
