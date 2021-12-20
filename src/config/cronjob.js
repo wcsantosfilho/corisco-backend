@@ -29,16 +29,17 @@ const job = schedule.scheduleJob(cronVar, async function() {
         "content-type": "application/x-www-form-urlencoded"
       }
     };
-
-    logger.info(`[cronjob] options: ${options}`)
-    let urlComplete = 'https://' + options.hostname + ':' + options.port + options.path
+    logger.info(`[cronjob] options: ${JSON.stringify(options,null, 2)}`)
+    let httpType = config.environment == 'production' ? 'https://': 'http://'
+    logger.info(`[cronjob] httpType: ${httpType}`)
+    let urlComplete = httpType + options.hostname + ':' + options.port + options.path
     fetch(urlComplete, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
         }
       }).then (res => res.json())
-      .then(json => logger.info(`[cronjob] fetch: ${json}`))
+      .then(json => logger.info(`[cronjob] fetch: ${JSON.stringify(json, null, 2)}`))
     
   });
 
