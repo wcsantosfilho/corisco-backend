@@ -1,7 +1,7 @@
 const config = require('./config')
 const logger = require('heroku-logger')
 const schedule = require('node-schedule')
-const https = require('https')
+const fetch = require('node-fetch')
 
 // *    *    *    *    *    *
 // ┬    ┬    ┬    ┬    ┬    ┬
@@ -30,19 +30,16 @@ const job = schedule.scheduleJob(cronVar, async function() {
       }
     };
 
-    const req = https.request(options, res => {
-      logger.info(`[cronjob] statusCode: ${res.statusCode}`)
+    logger.info(`[cronjob] options: ${options}`)
+    let urlComplete = 'https://' + options.hostname + ':' + options.port + options.path
+    fetch(urlComplete, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+        }
+      }).then (res => res.json())
+      .then(json => logger.info(`[cronjob] fetch: ${json}`))
     
-      res.on('data', d => {
-        logger.info(`[cronjob] data: ${d}`)
-        })
-    })
-    
-    req.on('error', error => {
-      logger.error(error)
-    })
-    
-    req.end()
   });
 
 

@@ -25,7 +25,7 @@ if (config.environment == "development") {
     logger.info(`[config] ${config.environment}`)
     config.mongodbURI = process.env.MONGODB_URI_DEV
     config.backendURL = process.env.BACKEND_URL_DEV
-    config.backendPORT = process.env.PORT || process.env.BACKEND_PORT_DEV
+    config.backendPORT = process.env.BACKEND_PORT_DEV 
 }
 
 module.exports = config;
