@@ -33,8 +33,9 @@ const job = schedule.scheduleJob(cronVar, async function() {
       }
     };
     let httpType = config.environment == 'production' ? 'https://': 'http://'
-    let urlComplete = httpType + options.hostname + ':' + options.port + options.path
-    urlComplete = 'http://corisco-backend.herokuapp.com/api/scrap'
+    let urlComplete = config.environment == 'production' ? 
+      httpType + options.hostname + options.path : 
+      httpType + options.hostname + ':' + options.port + options.path
     const apiResponse = await fetch(urlComplete, {
       method: 'GET',
       headers: {
@@ -46,7 +47,7 @@ const job = schedule.scheduleJob(cronVar, async function() {
     if (apiResponse.status == 200) {
       logger.info(`[${scriptName}] apiResponse: ${JSON.stringify(apiResponse)}`)
       const apiResponseJson = await apiResponse.json()
-      logger.info(`[${scriptName}] apiResponseJson: ${apiResponseJson}`)
+      logger.info(`[${scriptName}] apiResponseJson: ${JSON.stringify(apiResponseJson)}`)
     }
   } catch (error) {
       logger.error(`[${scriptName}] Erro no catch: ${error}`)

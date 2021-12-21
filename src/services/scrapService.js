@@ -31,7 +31,9 @@ const url = 'http://www.loterias.caixa.gov.br/wps/portal/loterias/landing/megase
                 headless: true }
             )
             const page = await browser.newPage()
+            const navigationPromise = page.waitForNavigation({waitUntil: "domcontentloaded"})
             await page.goto(url)
+            await navigationPromise
             await page.waitForSelector('#conteudoresultado')
             let agaDois = await page.evaluate( () => {
                 let results = []
@@ -43,6 +45,7 @@ const url = 'http://www.loterias.caixa.gov.br/wps/portal/loterias/landing/megase
                 })
                 return results
             })
+            await navigationPromise
             await browser.close()
             var drawNumberInPage = agaDois.filter( (item) => {
                 // Look for "Resultado Concurso"
