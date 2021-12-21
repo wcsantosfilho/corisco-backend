@@ -2,6 +2,8 @@ const config = require('./config')
 const logger = require('heroku-logger')
 const schedule = require('node-schedule')
 const fetch = require('node-fetch')
+const path = require('path');
+const scriptName = path.basename(__filename);
 
 // *    *    *    *    *    *
 // ┬    ┬    ┬    ┬    ┬    ┬
@@ -18,6 +20,7 @@ logger.info(`[cronjob] cronVar: ${cronVar}`)
 logger.info(`[cronjob] backendURL: ${config.backendURL}`)
 logger.info(`[cronjob] port: ${config.backendPORT}`)
 const job = schedule.scheduleJob(cronVar, async function() {
+  try {
     logger.info(`[cronjob] executing...`)
 
     const options = {
@@ -29,9 +32,7 @@ const job = schedule.scheduleJob(cronVar, async function() {
         "content-type": "application/x-www-form-urlencoded"
       }
     };
-    logger.info(`[cronjob] options: ${JSON.stringify(options,null, 2)}`)
     let httpType = config.environment == 'production' ? 'https://': 'http://'
-    logger.info(`[cronjob] httpType: ${httpType}`)
     let urlComplete = httpType + options.hostname + ':' + options.port + options.path
     urlComplete = 'http://corisco-backend.herokuapp.com/api/scrap'
     const apiResponse = await fetch(urlComplete, {
@@ -39,10 +40,22 @@ const job = schedule.scheduleJob(cronVar, async function() {
       headers: {
         'Content-Type': 'application/json'
         }
-      })
-    const apiResponseJson = await apiResponse.json()
-    console.log(apiResponseJson)
-    
-  });
+    })
 
+    logger.info(`[${scriptName}] apiResponse: ${apiResponse.status}`)
+    if (apiResponse.status == 200) {
+      logger.info(`[${scriptName}] apiResponse: ${JSON.stringify(apiResponse)}`)
+      const apiResponseJson = await apiResponse.json()
+      logger.info(`[${scriptName}] apiResponseJson: ${apiResponseJson}`)
+    }
+  } catch (error) {
+      logger.error(`[${scriptName}] Erro no catch: ${error}`)
+      return { status: 500, 
+          payload: { status: 500,
+              messagem: "Erro inesperado",
+              stack: JSON.stringify(error.message)
+          }
+      }
+  }
 
+});

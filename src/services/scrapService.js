@@ -73,7 +73,7 @@ const url = 'http://www.loterias.caixa.gov.br/wps/portal/loterias/landing/megase
                     textInCaixaWebPage: textInCaixaWebPage }
             }
         } catch (error) {
-            logger.error('Erro no catch: ' + error)
+            logger.error(`[${scriptName}] Erro no catch: ${error}`)
             return { status: 500, 
                 payload: { status: 500,
                     messagem: "Erro inesperado",
