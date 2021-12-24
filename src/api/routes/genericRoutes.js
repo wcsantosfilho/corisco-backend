@@ -1,6 +1,5 @@
 const express = require('express')
 const logger = require('heroku-logger')
-const mailService = require('../../services/mailService')
 
 /*
  * getStatus
