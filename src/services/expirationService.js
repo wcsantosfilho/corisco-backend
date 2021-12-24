@@ -39,24 +39,30 @@ module.exports = class ExpirationService {
                 if ( lastBet == lastDraw ) {
                     this.expirationStatus = 1
                     return { status: 200,
-                        payload: { status: 200,
-                            message: `Sua última aposta ${lastBet} já foi sorteada no concurso ${lastDraw}.`
+                        payload: { expirationStatus: this.expirationStatus,
+                            lastBet: lastBet,
+                            lastDraw: lastDraw,
+                            message: `Fique atento! Você não tem mais apostas. O último concurso, ${lastBet} já foi sorteado.`
                         }
                     }
                 } 
                 if ( lastBet > lastDraw) {
                     this.expirationStatus = 2
                     return { status: 200,
-                        payload: { status: 200,
-                            message: `Sua última aposta ${lastBet} é maior que o concurso atual(${lastDraw}).`
+                        payload: { expirationStatus: this.expirationStatus,
+                            lastBet: lastBet,
+                            lastDraw: lastDraw,
+                            message: `Tudo OK. Você tem apostas até o concurso: ${lastBet}. O concurso atual ainda está em: ${lastDraw}.`
                         }
                     }
                 }
                 if ( lastBet < lastDraw) {
                     this.expirationStatus = 3
                     return { status: 200,
-                        payload: { status: 200,
-                            message: `Sua última aposta ${lastBet} é menor que o concurso atual(${lastDraw}).`
+                        payload: { expirationStatus: this.expirationStatus,
+                            lastBet: lastBet,
+                            lastDraw: lastDraw,
+                            message: `CORRA! Você está atrasado nas suas apostas. O último concurso que você tem uma aposta é: ${lastBet}, mas o próximo concurso será o ${lastDraw+1}.`
                         }
                     }
                 }
@@ -64,8 +70,10 @@ module.exports = class ExpirationService {
             if ( resultLastBet.status != 200 || resultLastDraw.status != 200) {
                 this.expirationStatus = 999
                 return { status: 404,
-                    payload: { status: 404,
-                        message: "Não encontrou concurso ou aposta para comparar" 
+                    payload: { expirationStatus: this.expirationStatus,
+                        lastBet: lastBet,
+                        lastDraw: lastDraw,
+                        message: "PROBLEMA. Não encontrei concursos e apostas para comparar!" 
                     }
                 }
             }
