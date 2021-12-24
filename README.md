@@ -9,8 +9,9 @@ Aplicação Node.js + React para controlar a validade dos meus jogos da Mega-sen
 - [x] adicionar concurso realizado
 - [x] verificação jogo expirado
 - [x] rever todos os testes - nova estrutura de payload
-- [ ] refatorar cronjob para usar http-fetch e não http "puro"
-- [ ] puppeteer não funciona no Heroku
+- [x] refatorar cronjob para usar http-fetch e não http "puro"
+- [x] puppeteer não funciona no Heroku
+- [ ] criar esquema de 'workers'
 - [ ] esquema MVC
 - [x] testes de 'betService'
 - [x] testes de 'drawService'
