@@ -1,5 +1,4 @@
-const { data } = require('cheerio/lib/api/attributes');
-const { isNumber } = require('lodash');
+const config = require ('./../config/config');
 const puppeteer = require('puppeteer');
 const logger = require('heroku-logger')
 const path = require('path');
@@ -11,7 +10,8 @@ const os = require('os');
  * Esse worker faz a leitura do site de loterias da Caixa para buscar o último concurso realizado
  */
 
-const url = 'http://www.loterias.caixa.gov.br/wps/portal/loterias/landing/megasena';
+const url = config.caixaPageUrl;
+//'http://www.loterias.caixa.gov.br/wps/portal/loterias/landing/megasena';
 
 const jobWorker = async function() {
     try {

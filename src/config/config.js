@@ -8,6 +8,7 @@ config.environment = process.env.NODE_ENV.trim()
 config.cronVar = process.env.CRON_VAR
 config.environment = process.env.NODE_ENV
 config.sendgridApiKey = process.env.SENDGRID_API_KEY
+config.caixaPageUrl = process.env.CAIXAPAGE_URL
 
 if (config.environment == "production") {
     logger.info(`[config] ${config.environment}`)
