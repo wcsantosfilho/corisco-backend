@@ -27,7 +27,7 @@ const job = schedule.scheduleJob(cronVar, async function() {
       "method": "GET",
       "hostname": config.backendURL,
       "port": config.backendPORT,
-      "path": "/api/scrap",
+      "path": "/api/getStatus",
       "headers": {
         "content-type": "application/x-www-form-urlencoded"
       }
