@@ -14,10 +14,14 @@ const jobWorker = async function() {
         const expiration = new Expiration()
         // chama o serviço para buscar o último concurso
         const validation = await expiration.checkIfLastBetIsEqualDraw()
+        var msgEmail = ''
+        var subjectEmail = ''
         if (validation.status == 200) {
-            var msgEmail = validation.payload.message
+            msgEmail = validation.payload.message
+            subjectEmail = validation.payload.subject
         }  else {
-            var msgEmail = 'não há confirmação'
+            msgEmail = 'não há confirmação'
+            subjectEmail = 'hummm... algo não está bem'
         }
 
 
@@ -46,8 +50,14 @@ const jobWorker = async function() {
         });
 
         req.write(JSON.stringify({ personalizations: 
-            [ { to: [ { email: 'wcsantosfilho@gmail.com', name: 'Walter Santos Filho' } ],
-                dynamic_template_data: { first_name: 'Walter', expirationMessage: msgEmail },
+            [ { to: [ 
+                { email: 'wcsantosfilho@gmail.com', name: 'Walter Santos Filho' },
+                { email: 'andchevalier@gmail.com', name: 'Andréa Chevalier Santos' }
+             ],
+                dynamic_template_data: { 
+                    first_name: 'Walter e Andréa', 
+                    subject_dyn: subjectEmail, 
+                    expirationMessage: msgEmail },
                 subject: msgEmail } ],
             from: { email: 'wcsantosfilho@gmail.com', name: 'Walter Santos Filho' },
             reply_to: { email: 'wcsantosfilho@gmail.com', name: 'Walter Santos Filho' },

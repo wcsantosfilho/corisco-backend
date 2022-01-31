@@ -42,6 +42,7 @@ module.exports = class ExpirationService {
                         payload: { expirationStatus: this.expirationStatus,
                             lastBet: lastBet,
                             lastDraw: lastDraw,
+                            subject: 'A última se foi',
                             message: `Fique atento! Você não tem mais apostas. O último concurso, ${lastBet} já foi sorteado.`
                         }
                     }
@@ -52,6 +53,7 @@ module.exports = class ExpirationService {
                         payload: { expirationStatus: this.expirationStatus,
                             lastBet: lastBet,
                             lastDraw: lastDraw,
+                            subject: 'Ainda está tudo bem',
                             message: `Tudo OK. Você tem apostas até o concurso: ${lastBet}. O concurso atual ainda está em: ${lastDraw}.`
                         }
                     }
@@ -62,6 +64,7 @@ module.exports = class ExpirationService {
                         payload: { expirationStatus: this.expirationStatus,
                             lastBet: lastBet,
                             lastDraw: lastDraw,
+                            subject: 'A casa caiu',
                             message: `CORRA! Você está atrasado nas suas apostas. O último concurso que você tem uma aposta é: ${lastBet}, mas o próximo concurso será o ${lastDraw+1}.`
                         }
                     }
